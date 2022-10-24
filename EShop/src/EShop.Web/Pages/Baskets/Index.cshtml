@@ -1,0 +1,20 @@
+﻿@page
+@using EShop.Web.Pages.Baskets
+@using Volo.Abp.Users
+@using EShop.Localization
+@using Microsoft.Extensions.Localization
+@model EShop.Web.Pages.Baskets.IndexModel
+@inject IStringLocalizer<EShopResource> L
+@inject CurrentUser CurrentUser
+@section scripts
+{
+    <abp-script src="/Pages/Baskets/Index.js"></abp-script>
+}
+
+    <div class="jumbotron text-left">
+        <h2>@L["Basket"]</h2>
+    </div>
+       
+    
+
+

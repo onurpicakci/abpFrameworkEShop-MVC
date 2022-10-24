@@ -1,0 +1,37 @@
+﻿@page
+@using EShop.Web.Pages.Products
+@using EShop.Localization
+@using EShop.Permissions
+@using Microsoft.Extensions.Localization
+@using Microsoft.AspNetCore.Authorization
+@model EShop.Web.Pages.Products.IndexModel
+@inject IStringLocalizer<EShopResource> L
+@inject IAuthorizationService AuthorizationService
+@section scripts
+{
+    <abp-script src="/Pages/Products/Index.js"></abp-script>
+}
+
+<abp-card>
+    <abp-card-header>
+        <abp-row>
+            <abp-column size-md="_6">
+                <abp-card-title>@L["Products"]</abp-card-title>
+            </abp-column>
+            <abp-column size-md="_6" class="text-end">
+                @if (await AuthorizationService.IsGrantedAsync(EShopPermissions.Products.Create))
+                {
+                    <abp-button id="NewProductButton"
+                                text="@L["NewProduct"].Value"
+                                icon="plus"
+                                button-type="Primary">
+                    </abp-button>
+                }
+
+            </abp-column>
+        </abp-row>
+    </abp-card-header>
+    <abp-card-body>
+        <abp-table striped-rows="true" id="ProductsTable"></abp-table>
+    </abp-card-body>
+</abp-card>

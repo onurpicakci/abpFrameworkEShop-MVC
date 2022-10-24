@@ -1,0 +1,39 @@
+﻿@page
+@using EShop.Localization
+@using EShop.Web.Pages.Categories
+@using EShop.Permissions
+@using Microsoft.Extensions.Localization
+@using Microsoft.AspNetCore.Authorization
+@model EShop.Web.Pages.Categories.IndexModel
+@inject IStringLocalizer<EShopResource> L
+@inject IAuthorizationService AuthorizationService
+@section scripts
+{
+    <abp-script src="/Pages/Categories/Index.js"></abp-script>
+}
+
+<abp-card>
+    <abp-card-header>
+        <abp-row>
+            <abp-column size-md="_6">
+                <abp-card-title>@L["Categories"]</abp-card-title>
+            </abp-column>
+            <abp-column size-md="_6" class="text-end">
+                @if (await AuthorizationService.IsGrantedAsync(EShopPermissions.Products.Create))
+                {
+                    <abp-button id="NewCategoryButton"
+                                text="@L["NewCategory"].Value"
+                                icon="plus"
+                                button-type="Primary">
+                    </abp-button>
+                }
+
+            </abp-column>
+        </abp-row>
+    </abp-card-header>
+    <abp-card-body>
+        <abp-table striped-rows="true" id="CategoriesTable"></abp-table>
+    </abp-card-body>
+</abp-card>
+
+

@@ -1,0 +1,26 @@
+{
+    "culture": "en",
+    "texts": {
+        "Menu:Home": "Home",
+        "Welcome": "Welcome",
+        "LongWelcomeMessage": "Welcome to the application. This is a startup project based on the ABP framework. For more information, visit abp.io.",
+        "Menu:EShop": "Shop",
+        "Menu:Products": "Products",
+        "ProductName": "Product Name",
+        "ProductCode": "Product Code",
+        "ProductDescription": "Product Description",
+        "Price": "Price",
+        "StockCount": "Stock Count",
+        "CreationTime": "Creation Time",
+        "Permission:EShop": "E Shop",
+        "Permission:Product": "Product Management",
+        "Permission:Product.Create": "Creating new products",
+        "Permission:Product.Edit": "Editing the products",
+        "Permission:Product.Delete": "Deleting the products",
+        "Index:AddToBasket": "Add To Basket",
+        "Menu:Basket": "Basket",
+        "Menu:Category": "Categories"
+
+
+    }
+}

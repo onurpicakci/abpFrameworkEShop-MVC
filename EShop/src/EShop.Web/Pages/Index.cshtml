@@ -1,0 +1,94 @@
+﻿@page
+@using EShop.Localization
+@using Volo.Abp.Users
+@using System.Globalization
+@using Microsoft.Extensions.Options
+@using Microsoft.Extensions.Localization
+@model EShop.Web.Pages.IndexModel
+@inject IStringLocalizer<EShopResource> L
+@inject CurrentUser CurrentUser
+@{
+    const int productsColumnSize = 10;
+    string pageHeader = L["Products"];
+}
+
+@section styles {
+    <abp-style src="/Pages/Index.css" />
+}
+@section scripts {
+    <abp-script src="/Pages/Index.js" />
+}
+
+@if (Model.HasRemoteServiceError)
+{
+    pageHeader = L["CatalogServiceNotAvailable"];
+}
+
+@if (!CurrentUser.IsAuthenticated)
+{
+
+    <div class="jumbotron text-center">
+        <h1>@L["Welcome"]</h1>
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <p>@L["LongWelcomeMessage"]</p>
+                <hr class="my-4" />
+            </div>
+        </div>
+        <a abp-button="Primary" href="/Account/Login" class="px-4">
+            <i class="fa fa-sign-in"></i> @L["Login"]
+        </a>
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="pt-5 pb-4 text-center">@pageHeader</h1>
+            <div class="product-list">
+                @for (int i = 0; i < Math.Ceiling(Model.Products.Count / (double)productsColumnSize); i++)
+                {
+                    <abp-row>
+                        @for (int j = 0; j < productsColumnSize; j++)
+                        {
+                            <abp-column size-lg="_3" size-md="_4" size-sm="_6">
+                                @if ((i * productsColumnSize) + j < Model.Products.Count)
+                                {
+                                    var product = Model.Products[(i * productsColumnSize) + j];
+                                    var productPrice = product.Price.ToString("C", new CultureInfo("tr-TR"));
+                                    string buyText = L["Index:AddToBasket"];
+                                    <div class="product-list-item" data="@product.Id.ToString()">
+                                        <a href="/products/@product.Id.ToString()">
+                                            <div class="col">
+                                                <div class="product-info-box">
+                                                    <h5>@product.Name</h5>
+                                                    <em class="d-block text-muted">@product.Code - @product.ProductDescription - @L["StockCount"]:@product.StockCount</em>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="row mt-5">
+                                            @if (product.StockCount > 0)
+                                            {
+                                                <abp-button class="add-basket-button" button-type="Danger" text="@buyText" data-product-id="@product.Id.ToString()"></abp-button>
+                                            }
+                                            else
+                                            {
+                                                <abp-button disabled="true" class="add-basket-button" button-type="Danger" text="@L["Index:OutOfStock"]" />
+                                            }
+                                            <div class="info-section col" style="text-align:center">
+                                                <span class="product-price">@productPrice</span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                }
+                            </abp-column>
+                        }
+                    </abp-row>
+                }
+            </div>
+        </div>
+    </div>
+}</div>
+
+

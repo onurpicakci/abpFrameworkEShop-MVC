@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>EShop</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EShop.Domain\EShop.Domain.csproj" />
+    <ProjectReference Include="..\EShop.Application.Contracts\EShop.Application.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Account.Application" Version="6.0.0" />
+    <PackageReference Include="Volo.Abp.Identity.Application" Version="6.0.0" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Application" Version="6.0.0" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Application" Version="6.0.0" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Application" Version="6.0.0" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Application" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Products\" />
+    <None Remove="Customers\" />
+    <None Remove="Baskets\" />
+    <None Remove="Categories\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Products\" />
+    <Folder Include="Customers\" />
+    <Folder Include="Baskets\" />
+    <Folder Include="Categories\" />
+  </ItemGroup>
+</Project>
