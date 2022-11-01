@@ -40,6 +40,12 @@ public class Basket : AuditedAggregateRoot<Guid>
         }
     }
 
+    public int GetProductCount(Guid productId)
+    {
+        var item = BasketItems.FirstOrDefault(x => x.ProductId == productId);
+        return item?.ProductCount ?? 0;
+    }
+
     public void Merge(Basket basket)
     {
         foreach (var item in basket.BasketItems)

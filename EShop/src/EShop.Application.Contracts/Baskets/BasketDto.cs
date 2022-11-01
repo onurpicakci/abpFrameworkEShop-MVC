@@ -6,7 +6,7 @@ namespace EShop.Baskets;
 
 public class BasketDto : AuditedEntityDto<Guid>
 {
-    public Guid CustomerId { get; set; }
+ 
 
     public List<BasketItemDto> BasketItems { get; set; }
 

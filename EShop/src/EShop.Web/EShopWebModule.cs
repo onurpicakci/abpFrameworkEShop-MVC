@@ -39,6 +39,10 @@ using Volo.Abp.UI.Navigation;
 using Volo.Abp.VirtualFileSystem;
 using EShop.Permissions;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Volo.Abp.AspNetCore.Mvc.AntiForgery;
+using System;
+using Volo.Abp.BlobStoring.FileSystem;
+using Volo.Abp.BlobStoring;
 
 namespace EShop.Web;
 
@@ -55,7 +59,8 @@ namespace EShop.Web;
     typeof(AbpAspNetCoreSerilogModule),
     typeof(AbpSwashbuckleModule)
     )]
-public class EShopWebModule : AbpModule
+    [DependsOn(typeof(AbpBlobStoringFileSystemModule))]
+    public class EShopWebModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)
     {
@@ -103,8 +108,21 @@ public class EShopWebModule : AbpModule
             options.Conventions.AuthorizePage("/Products/CreateModal", EShopPermissions.Products.Create);
             options.Conventions.AuthorizePage("/Products/EditModal", EShopPermissions.Products.Edit);
         });
+
+        Configure<AbpBlobStoringOptions>(options =>
+        {
+            options.Containers.ConfigureDefault(container =>
+            {
+                container.UseFileSystem(fileSystem =>
+                {
+                    fileSystem.BasePath = "/ProductImages";
+                });
+            });
+        });
+
+
     }
-    
+
     private void ConfigureAuthentication(ServiceConfigurationContext context)
     {
         context.Services.ForwardIdentityAuthenticationForBearer(OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme);

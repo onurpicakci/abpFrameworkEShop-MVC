@@ -9,6 +9,8 @@ public class BasketItemDto : AuditedEntityDto<Guid>
 
     public Guid BasketId { get; set; }
 
+    public string ProductCode { get; set; }
+
     public int ProductCount { get; set; }
 }
 
