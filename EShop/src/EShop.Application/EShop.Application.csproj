@@ -27,11 +27,13 @@
     <None Remove="Customers\" />
     <None Remove="Baskets\" />
     <None Remove="Categories\" />
+    <None Remove="FileAppService\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Products\" />
     <Folder Include="Customers\" />
     <Folder Include="Baskets\" />
     <Folder Include="Categories\" />
+    <Folder Include="Files\" />
   </ItemGroup>
 </Project>

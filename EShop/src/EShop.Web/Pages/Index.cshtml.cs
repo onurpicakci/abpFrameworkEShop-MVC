@@ -15,14 +15,16 @@ public class IndexModel : AbpPageModel
     public IReadOnlyList<ProductDto> Products { get; set; }
     public bool HasRemoteServiceError { get; set; } = false;
 
-    private readonly IPublicProductAppService _productAppService;
+    private readonly IProductAppService _productAppService;
+    private readonly IPublicProductAppService _publicproductAppService;
     private readonly ICategoryAppService _categoryAppService;
 
 
-    public IndexModel(IPublicProductAppService productAppService, ICategoryAppService categoryAppService)
+    public IndexModel(IPublicProductAppService publicproductAppService, ICategoryAppService categoryAppService, IProductAppService productAppService)
     {
-        _productAppService = productAppService;
+        _publicproductAppService = publicproductAppService;
         _categoryAppService = categoryAppService;
+        _productAppService = productAppService;
     }
 
 
@@ -30,7 +32,7 @@ public class IndexModel : AbpPageModel
     {
         try
         {
-            Products = (await _productAppService.GetListAsync()).Items;
+            Products = (await _publicproductAppService.GetListAsync()).Items;
         }
         catch (Exception ex)
         {
@@ -38,6 +40,7 @@ public class IndexModel : AbpPageModel
             HasRemoteServiceError = true;
             Console.WriteLine(ex);
         }
+        
     }
 
 

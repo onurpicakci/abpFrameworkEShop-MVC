@@ -14,12 +14,12 @@ public class BasketAppService : ApplicationService, IBasketAppService
 {
 
     private readonly IBasketRepository _basketRepository;
-    private readonly IBasketProductAppService _basketProductAppService;
+    private readonly IBasketProductService _basketProductService;
 
-    public BasketAppService(IBasketRepository basketRepository, IBasketProductAppService basketProductAppService)
+    public BasketAppService(IBasketRepository basketRepository, IBasketProductService basketProductAppService)
     {
         _basketRepository = basketRepository;
-        _basketProductAppService = basketProductAppService;
+        _basketProductService = basketProductAppService;
     }
 
     public async Task<BasketDto> AddProductAsync(AddProductDto input)
@@ -27,7 +27,7 @@ public class BasketAppService : ApplicationService, IBasketAppService
         Guid userId = CurrentUser.GetId();
 
         var basket = await _basketRepository.GetAsync(userId);
-        var product = await _basketProductAppService.GetAsync(input.ProductId);
+        var product = await _basketProductService.GetAsync(input.ProductId);
 
         if (basket.GetProductCount(product.Id) >= product.StockCount)
         {
@@ -54,7 +54,7 @@ public class BasketAppService : ApplicationService, IBasketAppService
         return await GetBasketDtoAsync(await _basketRepository.GetAsync(CurrentUser.GetId()));
     }
 
-
+   
 
     private async Task<BasketDto>GetBasketDtoAsync(Basket basket)
     {
@@ -68,7 +68,7 @@ public class BasketAppService : ApplicationService, IBasketAppService
 
             if (productDto == null)
             {
-                productDto = await _basketProductAppService.GetAsync(basketItem.ProductId);
+                productDto = await _basketProductService.GetAsync(basketItem.ProductId);
                 products[productDto.Id] = productDto;
             }
 

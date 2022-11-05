@@ -11,11 +11,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Form;
-using static EShop.Web.Pages.Products.CreateModalModel;
+using static EShop.Web.Pages.Products.CreateModel;
 
 namespace EShop.Web.Pages.Products;
 
-public class EditModalModel : EShopPageModel
+public class EditModel : EShopPageModel
 {
 
     [BindProperty]
@@ -27,7 +27,7 @@ public class EditModalModel : EShopPageModel
 
     private readonly ICategoryAppService _categoryAppService;
 
-    public EditModalModel(IProductAppService productAppService, ICategoryAppService categoryAppService)
+    public EditModel(IProductAppService productAppService, ICategoryAppService categoryAppService)
     {
         _productAppService = productAppService;
         _categoryAppService = categoryAppService;
@@ -51,13 +51,14 @@ public class EditModalModel : EShopPageModel
         }).ToList();
     }
 
+    
     public async Task<IActionResult> OnPostAsync()
     {
-        await _productAppService.UpdateAsync(
-            Product.Id,
-            ObjectMapper.Map<ProductEditViewModel, CreateUpdateProductDto>(Product)
-            );
+        var dto = ObjectMapper.Map<ProductEditViewModel, CreateUpdateProductDto>(Product);
+        await _productAppService.UpdateAsync(Product.Id, dto);
         return NoContent();
+
+
     }
 
     [AutoMap(typeof(CreateUpdateProductDto), ReverseMap = true)]
@@ -66,7 +67,9 @@ public class EditModalModel : EShopPageModel
     {
         [Required]
         [HiddenInput]
+        [BindProperty(SupportsGet = true)]
         public Guid Id { get; set; }
+
         [Required]
         public string Code { get; set; }
 
@@ -82,6 +85,10 @@ public class EditModalModel : EShopPageModel
 
         [Required]
         public string ProductDescription { get; set; }
+
+        [Required]
+        [DisplayName("Image Name")]
+        public string ImageName { get; set; }
 
         [Required]
         [SelectItems(nameof(CategoryList))]

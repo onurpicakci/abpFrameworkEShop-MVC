@@ -16,6 +16,8 @@ public class ProductDto : AuditedEntityDto<Guid>
 
     public string ProductDescription { get; set; }
 
+    public string ImageName { get; set; }
+
     public Guid CategoryId { get; set; }
 
 

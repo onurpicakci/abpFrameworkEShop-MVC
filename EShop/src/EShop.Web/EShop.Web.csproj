@@ -26,6 +26,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="ProductImages\laptop.jpeg" />
+    <None Include="Pages\Products\create.js" />
+    <None Include="Pages\Products\Edit.js" />
+  </ItemGroup>
+  <ItemGroup>
     <None Update="Pages\**\*.js">
     </None>
     <None Update="Pages\**\*.css">
@@ -49,9 +54,24 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EShop.Application\EShop.Application.csproj" />
-    <ProjectReference Include="..\EShop.HttpApi\EShop.HttpApi.csproj" />
-    <ProjectReference Include="..\EShop.EntityFrameworkCore\EShop.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\EShop.Application\EShop.Application.csproj">
+      <Targets></Targets>
+      <OutputItemType></OutputItemType>
+      <ReferenceSourceTarget>ProjectReference</ReferenceSourceTarget>
+      <GlobalPropertiesToRemove>;WebPublishProfileFile</GlobalPropertiesToRemove>
+    </ProjectReference>
+    <ProjectReference Include="..\EShop.HttpApi\EShop.HttpApi.csproj">
+      <Targets></Targets>
+      <OutputItemType></OutputItemType>
+      <ReferenceSourceTarget>ProjectReference</ReferenceSourceTarget>
+      <GlobalPropertiesToRemove>;WebPublishProfileFile</GlobalPropertiesToRemove>
+    </ProjectReference>
+    <ProjectReference Include="..\EShop.EntityFrameworkCore\EShop.EntityFrameworkCore.csproj">
+      <Targets></Targets>
+      <OutputItemType></OutputItemType>
+      <ReferenceSourceTarget>ProjectReference</ReferenceSourceTarget>
+      <GlobalPropertiesToRemove>;WebPublishProfileFile</GlobalPropertiesToRemove>
+    </ProjectReference>
     <PackageReference Include="Volo.Abp.Autofac" Version="6.0.0" />
     <PackageReference Include="Volo.Abp.Swashbuckle" Version="6.0.0" />
     <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="6.0.0" />

@@ -1,21 +1,35 @@
-﻿@page
+﻿@page "{Id}"
 @using EShop.Localization
 @using EShop.Web.Pages.Products
 @using Microsoft.Extensions.Localization
 @using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
-@model EShop.Web.Pages.Products.EditModalModel
+@using Volo.Abp.AspNetCore.Mvc.UI.Packages.Uppy
+@model EShop.Web.Pages.Products.EditModel
 @inject IStringLocalizer<EShopResource> L
-@{
-    Layout = null;
+@section scripts{
+    <abp-script-bundle>
+        <abp-script type="typeof(UppyScriptContributor)" />
+        <abp-script src="/Pages/Products/edit.js" />
+    </abp-script-bundle>
 }
 
-<abp-dynamic-form abp-model="Product" asp-page="/Products/EditModal">
-    <abp-modal>
-        <abp-modal-header title="@L["Update"].Value"></abp-modal-header>
-        <abp-modal-body>
+<abp-card>
+    <abp-card-header title="@L["Edit"].Value"></abp-card-header>
+    <abp-card-body>
+        <div class="mb-3">
+            <label class="form-label">@L["Image"]</label>
+            <input type="file" id="ProductImage" class="form-control" />
+        </div>
+
+        <abp-dynamic-form abp-model="Product" asp-page="/Products/Edit" id="form-product-edit">
+            <abp-input asp-for="@Model.Product.Id" />
+
             <abp-form-content />
-        </abp-modal-body>
-        <abp-modal-footer buttons="@(AbpModalButtons.Cancel|AbpModalButtons.Save)"></abp-modal-footer>
-    </abp-modal>
-</abp-dynamic-form>
+
+            <abp-button button-type="Primary" type="submit" text="@L["Submit"].Value" id="button-product-edit" />
+
+        </abp-dynamic-form>
+
+    </abp-card-body>
+</abp-card>
 

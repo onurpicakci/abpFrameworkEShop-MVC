@@ -8,6 +8,8 @@ using Volo.Abp.Modularity;
 using Volo.Abp.PermissionManagement.HttpApi;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.TenantManagement;
+using EShop.Files;
+using Volo.Abp.AspNetCore.Mvc;
 
 namespace EShop;
 
@@ -36,6 +38,11 @@ public class EShopHttpApiModule : AbpModule
                 .AddBaseTypes(
                     typeof(AbpUiResource)
                 );
+        });
+
+        Configure<AbpAspNetCoreMvcOptions>(options =>
+        {
+            options.ConventionalControllers.FormBodyBindingIgnoredTypes.Add(typeof(BlobUploadDto));
         });
     }
 }

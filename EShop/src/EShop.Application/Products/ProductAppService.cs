@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using EShop.Files;
 using EShop.Permissions;
 using Microsoft.AspNetCore.Authorization;
 using Volo.Abp.Application.Dtos;
@@ -19,12 +20,11 @@ public class ProductAppService
         CreateUpdateProductDto>,
     IProductAppService
 {
-    private readonly IBlobContainer<ProductImageBlobContainer> _blobContainer;
 
-    public ProductAppService(IRepository<Product, Guid> repository, IBlobContainer<ProductImageBlobContainer> blobContainer)
-        : base(repository)
+    public ProductAppService(IRepository<Product, Guid> repository)
+        :base(repository)
+       
     {
-        _blobContainer = blobContainer;
 
         GetPolicyName = EShopPermissions.Products.Default;
         GetListPolicyName = EShopPermissions.Products.Default;
@@ -33,13 +33,5 @@ public class ProductAppService
         DeletePolicyName = EShopPermissions.Products.Delete;
     }
 
-    public async Task<ProductDto> UploadImageAsync(Guid id, RemoteStreamContent file)
-    {
-        var product = await Repository.GetAsync(id);
-
-        await _blobContainer.SaveAsync(product.Id.ToString(), file.GetStream());
-
-        return MapToGetOutputDto(product);
-    }
 }
 

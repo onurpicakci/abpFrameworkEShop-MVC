@@ -23,7 +23,7 @@ a, a:hover, a:visited, a:active {
     }
 
     .product-list-item img {
-        width: 100%;
+        width: 120%;
     }
 
     .product-list-item .text-muted {
@@ -31,7 +31,7 @@ a, a:hover, a:visited, a:active {
     }
 
 .product-info-box {
-    min-height: 80px;
+    height: 80%;
 }
 
 .add-basket-button {
@@ -51,4 +51,7 @@ a, a:hover, a:visited, a:active {
     font-weight: bolder;
     font-size: larger;
     line-height: 40px;
+}
+#productImage {
+    width: 100%;
 }

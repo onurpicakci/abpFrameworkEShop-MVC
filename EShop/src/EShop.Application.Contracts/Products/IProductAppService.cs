@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using EShop.Files;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Content;
@@ -13,6 +14,6 @@ public interface IProductAppService
         PagedAndSortedResultRequestDto,
         CreateUpdateProductDto>
 {
-    Task<ProductDto> UploadImageAsync(Guid id, RemoteStreamContent file);
+    
 }
 
