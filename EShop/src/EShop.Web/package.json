@@ -2,7 +2,8 @@
   "version": "1.0.0",
   "name": "my-app",
   "private": true,
-  "dependencies": {
-    "@abp/aspnetcore.mvc.ui.theme.leptonxlite": "~1.0.0-rc.7"
-  }
+    "dependencies": {
+        "@abp/aspnetcore.mvc.ui.theme.leptonxlite": "~1.0.0",
+        "@abp/uppy": "~6.0.0"
+    }
 }

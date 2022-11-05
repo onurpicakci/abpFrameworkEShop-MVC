@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using EShop.Categories;
+using EShop.Files;
 using EShop.Products;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +18,7 @@ using Volo.Abp.AspNetCore.Mvc.UI.RazorPages;
 
 namespace EShop.Web.Pages.Products;
 
-public class CreateModalModel : EShopPageModel
+public class CreateModel : EShopPageModel
 {
     [BindProperty]
     public ProductCreateViewModel Product { get; set; }
@@ -26,20 +27,22 @@ public class CreateModalModel : EShopPageModel
 
     public List<SelectListItem> CategoryList { get; set; }
 
+    private readonly IFileAppService _fileAppService;
+
     private readonly IProductAppService _productAppService;
 
     private readonly ICategoryAppService _categoryAppService;
 
-    public CreateModalModel(IProductAppService productAppService, ICategoryAppService categoryAppService)
+    public CreateModel(IProductAppService productAppService, ICategoryAppService categoryAppService, IFileAppService fileAppService)
     {
         _productAppService = productAppService;
         _categoryAppService = categoryAppService;
+        _fileAppService = fileAppService;
 
     }
 
     public async Task OnGetAsync()
     {
-
         Product = new ProductCreateViewModel();
         Categories = new CreateUpdateCategoryDto();
         var newList = await _categoryAppService.GetListAsync(new Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto
@@ -53,15 +56,13 @@ public class CreateModalModel : EShopPageModel
             Value = x.Id.ToString(),
             Text = x.CategoryName
         }).ToList();
-
-
     }
 
+    [HttpPost]
     public async Task<IActionResult> OnPostAsync()
     {
         var dto = ObjectMapper.Map<ProductCreateViewModel, CreateUpdateProductDto>(Product);
-        await _productAppService.CreateAsync(dto);
-        return NoContent();
+        return new OkObjectResult(await _productAppService.CreateAsync(dto));
     }
 
 
@@ -84,6 +85,10 @@ public class CreateModalModel : EShopPageModel
 
         [Required]
         public string ProductDescription { get; set; }
+
+        [Required]
+        [DisplayName("Image Name")]
+        public string ImageName { get; set; }
 
         [Required]
         [SelectItems(nameof(CategoryList))]

@@ -64,8 +64,10 @@ else
                                                 <div class="product-info-box">
                                                     <h5>@product.Name</h5>
                                                     <em class="d-block text-muted">@product.Code - @product.ProductDescription - @L["StockCount"]:@product.StockCount</em>
+                                                    <br /><br />
                                                 </div>
                                             </div>
+                                            <img id="productImage"src="https://localhost:44368/api/app/file/image?fileName=@product.Id"/>
                                         </a>
                                         <div class="row mt-5">
                                             @if (product.StockCount > 0)

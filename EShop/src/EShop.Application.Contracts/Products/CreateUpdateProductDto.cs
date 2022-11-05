@@ -25,6 +25,9 @@ public class CreateUpdateProductDto
     [Required]
     public Guid CategoryId { get; set; }
 
+    [Required]
+    public string ImageName { get; set; }
+
 
 
 }

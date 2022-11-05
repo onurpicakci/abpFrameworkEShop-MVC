@@ -115,7 +115,7 @@ namespace EShop.Web;
             {
                 container.UseFileSystem(fileSystem =>
                 {
-                    fileSystem.BasePath = "/ProductImages";
+                    fileSystem.BasePath = "/Users/onurpicakci/Desktop/EShop/EShop/src/EShop.Web/ProductImages";
                 });
             });
         });

@@ -6,9 +6,9 @@ namespace EShop.Files;
 
 public class SaveBlobInputDto
 {
-    public byte[] Content { get; set; }
+    public IRemoteStreamContent Content { get; set; }
 
     [Required]
-    public string Name { get; set; }
+    public string ImageName { get; set; }
 }
 

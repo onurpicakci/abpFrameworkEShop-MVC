@@ -3,22 +3,35 @@
 @using EShop.Web.Pages.Products
 @using Microsoft.Extensions.Localization
 @using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
-@model EShop.Web.Pages.Products.CreateModalModel
+@using Volo.Abp.AspNetCore.Mvc.UI.Packages.Uppy
+@model EShop.Web.Pages.Products.CreateModel
 @inject IStringLocalizer<EShopResource> L
-@{
-    Layout = null;
+
+@section scripts {
+    <abp-script-bundle>
+        <abp-script type="typeof(UppyScriptContributor)" />
+        <abp-script src="/Pages/Products/create.js" />
+    </abp-script-bundle>
 }
 
-<abp-dynamic-form abp-model="Product" asp-page="/Products/CreateModal">
-    <abp-modal>
-        <abp-modal-header title="@L["NewProduct"].Value">
-            <abp-modal-body>
+    <abp-card>
+        <abp-card-header title="@L["New"].Value"></abp-card-header>
+        <abp-card-body>
+            <div class="mb-3">
+                <label class="form-label">@L["Image"]</label>
+                <input type="file" id="ProductImage" class="form-control" />
+            </div>
+
+            <abp-dynamic-form abp-model="Product" asp-page="/Products/Create" id="form-product-create">
+
                 <abp-form-content />
-            </abp-modal-body>
-            <abp-modal-footer buttons="@(AbpModalButtons.Cancel|AbpModalButtons.Save)"></abp-modal-footer>
-        </abp-modal-header>
-    </abp-modal>
-</abp-dynamic-form>
+
+                <abp-button button-type="Primary" type="submit" text="@L["Submit"].Value" id="button-product-create" />
+
+            </abp-dynamic-form>
+
+        </abp-card-body>
+    </abp-card>
 
 
 

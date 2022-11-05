@@ -1,0 +1,54 @@
+﻿@page "/products/{id:guid}"
+@using EShop.Web.Pages.Products
+@using EShop.Localization
+@using System.Globalization
+@using EShop.Permissions
+@using Microsoft.Extensions.Localization
+@using Microsoft.AspNetCore.Authorization
+@using Volo.Abp.Users
+@model EShop.Web.Pages.Products.ProductDetailModel
+@inject IStringLocalizer<EShopResource> L
+@inject CurrentUser CurrentUser
+
+@section styles {
+    <abp-style src="/Pages/Index.css" />
+}
+@section scripts {
+    <abp-script src="/Pages/Index.js" />
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="product-list">
+            @{
+                var product = Model.Product;
+                var productPrice = product.Price.ToString("C", new CultureInfo("tr-TR"));
+                string buyText = L["Index:AddToBasket"];
+                <div class="product-list-item" data-product-id="@product.Id.ToString()" style="cursor:auto">
+                    <div class="col">
+                        <div class="product-info-box">
+                            <h6>@product.Name</h6>
+                            <em class="d-block text-muted">@product.Code - @product.ProductDescription - @L["StockCount"]:@product.StockCount</em>
+                            <br/><br />
+                        </div>
+                    </div>
+                    <img id="productImage" src="https://localhost:44368/api/app/file/image?fileName=@product.Id" />
+                    <div class="row mt-5">
+                        @if (product.StockCount > 0)
+                        {
+                            <abp-button class="add-basket-button" button-type="Danger" text="@buyText" data-product-id="@product.Id.ToString()"></abp-button>
+                        }
+                        else
+                        {
+                            <abp-button disabled="true" class="add-basket-button" button-type="Danger" text="@L["Index:OutOfStock"]" />
+                        }
+                        <div class="info-section col" style="text-align:center">
+                            <span class="product-price">@productPrice</span>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+</div>

@@ -1,8 +1,5 @@
 ﻿$(function () {
     var l = abp.localization.getResource('EShop');
-    
-    var createModal = new abp.ModalManager(abp.appPath + 'Products/CreateModal');
-    var editModal = new abp.ModalManager(abp.appPath + 'Products/EditModal');
 
     var dataTable = $('#ProductsTable').DataTable(
         abp.libs.datatables.normalizeConfiguration({
@@ -23,7 +20,8 @@
                                     visible:
                                         abp.auth.isGranted('EShop.Products.Edit'),
                                     action: function (data) {
-                                        editModal.open({ id: data.record.id });
+                                        location.href = 'Products/Edit/' + data.record.id;
+                                        //TODO: Redirect to edit
                                     }
                                 },
                                 {
@@ -70,6 +68,10 @@
                     title: l('StockCount'),
                     data: "stockCount"
                 },
+                {
+                    title: l('ImageName'),
+                    data: "imageName"
+                },
      
                 {
                     title: l('CreationTime'), data: "creationTime",
@@ -80,21 +82,24 @@
         })
     );
     
-
-    createModal.onResult(function () {
-        dataTable.ajax.reload();
-    });
-
-    editModal.onResult(function () {
-        dataTable.ajax.reload();
-    });
-
     $('#NewProductButton').click(function (e) {
         e.preventDefault();
-        createModal.open();
+
+        window.location.href = "Products/Create"
     });
 
-  
+    $(function () {
+        $('.add-basket-button').click(function () {
+            var $this = $(this);
+            var productId = $this.attr('data-product-id');
+            eShop.baskets.basket.addProduct({
+                productId: productId,
+            }).then(function () {
+                abp.notify.success("Added product to your basket.", "Successfully added");
+            });
+
+        });
+    });
 
 });
 
