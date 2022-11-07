@@ -14,6 +14,10 @@ public class EShopPermissionDefinitionProvider : PermissionDefinitionProvider
         eShopPermission.AddChild(EShopPermissions.Products.Edit, L("Permission:Product.Edit"));
         eShopPermission.AddChild(EShopPermissions.Products.Delete, L("Permission:Product.Delete"));
 
+
+        var categoryPermission = eShopGroup.AddPermission(EShopPermissions.Categories.Default, L("Permission:Category"));
+        categoryPermission.AddChild(EShopPermissions.Categories.Create, L("Permission:Category.Create"));
+        categoryPermission.AddChild(EShopPermissions.Categories.Edit, L("Permission:Category.Edit"));
     }
 
     private static LocalizableString L(string name)

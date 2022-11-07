@@ -107,6 +107,10 @@ namespace EShop.Web;
             options.Conventions.AuthorizePage("/Products/Index", EShopPermissions.Products.Default);
             options.Conventions.AuthorizePage("/Products/CreateModal", EShopPermissions.Products.Create);
             options.Conventions.AuthorizePage("/Products/EditModal", EShopPermissions.Products.Edit);
+
+            options.Conventions.AuthorizePage("/Categories/Index", EShopPermissions.Categories.Default);
+            options.Conventions.AuthorizePage("/Categories/CreateModal", EShopPermissions.Categories.Create);
+            options.Conventions.AuthorizePage("/Categories/EditModal", EShopPermissions.Categories.Edit);
         });
 
         Configure<AbpBlobStoringOptions>(options =>

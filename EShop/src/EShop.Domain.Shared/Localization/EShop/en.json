@@ -17,6 +17,9 @@
         "Permission:Product.Create": "Creating new products",
         "Permission:Product.Edit": "Editing the products",
         "Permission:Product.Delete": "Deleting the products",
+        "Permission:Category": "Category Management",
+        "Permission:Category.Create": "Creating new categories",
+        "Permission:Category.Edit": "Editing the categories",
         "Index:AddToBasket": "Add To Basket",
         "Menu:Basket": "Basket",
         "Menu:Category": "Categories"

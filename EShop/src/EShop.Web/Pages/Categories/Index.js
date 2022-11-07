@@ -20,6 +20,7 @@
                             [
                                 {
                                     text: l('Edit'),
+                                    visible: abp.auth.isGranted('EShop.Categories.Edit'),
                                     action: function (data) {
                                         editModal.open({ id: data.record.id });
                                     }
