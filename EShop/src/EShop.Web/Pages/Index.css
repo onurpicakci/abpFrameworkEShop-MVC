@@ -23,7 +23,7 @@ a, a:hover, a:visited, a:active {
     }
 
     .product-list-item img {
-        width: 120%;
+        width: 100%;
     }
 
     .product-list-item .text-muted {
@@ -53,5 +53,12 @@ a, a:hover, a:visited, a:active {
     line-height: 40px;
 }
 #productImage {
-    width: 100%;
+    width: 95%;
+}
+
+#productDetailImage {
+    width: 40%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }

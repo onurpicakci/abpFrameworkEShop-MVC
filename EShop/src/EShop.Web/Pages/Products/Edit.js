@@ -23,16 +23,16 @@
 
         if ($formEdit.valid()) {
 
+            abp.ui.setBusy(); 
             $formEdit.ajaxSubmit({
                 success: function (result) {
-                    uploadImage(result.id);
                     abp.notify.success(l('SuccessfullySaved'));
+                    abp.ui.clearBusy();
+                    location.href = "../../Products";
                 },
             });
         }
-        else {
-            abp.ui.clearBusy();
-        }
+        
     });
 
     function uploadImage(productId) {
