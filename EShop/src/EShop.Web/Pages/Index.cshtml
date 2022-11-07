@@ -25,24 +25,8 @@
     pageHeader = L["CatalogServiceNotAvailable"];
 }
 
-@if (!CurrentUser.IsAuthenticated)
-{
 
-    <div class="jumbotron text-center">
-        <h1>@L["Welcome"]</h1>
-        <div class="row">
-            <div class="col-md-6 mx-auto">
-                <p>@L["LongWelcomeMessage"]</p>
-                <hr class="my-4" />
-            </div>
-        </div>
-        <a abp-button="Primary" href="/Account/Login" class="px-4">
-            <i class="fa fa-sign-in"></i> @L["Login"]
-        </a>
-    </div>
-}
-else
-{
+
     <div class="row">
         <div class="col-lg-12">
             <h1 class="pt-5 pb-4 text-center">@pageHeader</h1>
@@ -92,6 +76,6 @@ else
             </div>
         </div>
     </div>
-}</div>
+</div>
 
 

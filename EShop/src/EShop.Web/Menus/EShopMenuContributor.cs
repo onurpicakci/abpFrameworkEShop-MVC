@@ -46,7 +46,7 @@ public class EShopMenuContributor : IMenuContributor
 
         context.Menu.AddItem(eShopMenu);
 
-        //if (await context.IsGrantedAsync(EShopPermissions.Products.Default))
+        if (await context.IsGrantedAsync(EShopPermissions.Products.Default))
         {
             eShopMenu.AddItem(new ApplicationMenuItem(
 
@@ -68,16 +68,20 @@ public class EShopMenuContributor : IMenuContributor
             );
 
         context.Menu.AddItem(basketMenu);
+        if (await context.IsGrantedAsync(EShopPermissions.Categories.Default)) 
+        {
+            var categoryMenu = new ApplicationMenuItem(
+              "Category",
+              l["Menu:Category"],
+              icon: "fa fa-cart-arrow-down",
+              url: "/Categories"
 
-        var categoryMenu = new ApplicationMenuItem(
-                "Category",
-                l["Menu:Category"],
-                icon: "fa fa-cart-arrow-down",
-                url: "/Categories"
+          );
+            context.Menu.AddItem(categoryMenu);
+        }
+      
 
-            );
-
-        context.Menu.AddItem(categoryMenu);
+        
 
 
 
