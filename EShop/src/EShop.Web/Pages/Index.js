@@ -9,9 +9,8 @@ $(function () {
             var productId = $this.attr('data-product-id');
             eShop.baskets.basket.addProduct({
                 productId: productId,
-            });
-
+            }).then(function () {
                 abp.notify.success("Added product to your basket.", "Successfully added");
-            
+            });            
         });
     });

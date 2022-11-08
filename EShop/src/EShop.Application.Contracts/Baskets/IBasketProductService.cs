@@ -8,6 +8,6 @@ namespace EShop.Baskets;
 public interface IBasketProductService
 {
     [ItemNotNull]
-    Task<ProductDto> GetAsync(Guid productId);
+    Task<ProductDto> GetAsync(Guid id);
 }
 

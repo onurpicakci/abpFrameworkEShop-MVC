@@ -2,27 +2,28 @@
 using System.Threading.Tasks;
 using EShop.Products;
 using Microsoft.Extensions.Logging;
+using Volo.Abp.Application.Services;
 using Volo.Abp.Caching;
 using Volo.Abp.DependencyInjection;
+using Volo.Abp.Domain.Repositories;
 using Volo.Abp.ObjectMapping;
 
 namespace EShop.Baskets;
 
-	public class BasketProductService : IBasketProductService, ITransientDependency
+	public class BasketProductService : ApplicationService, IBasketProductService
 	{
 
-    private readonly IDistributedCache<ProductDto, Guid> _cache;
-    private readonly ILogger<BasketProductService> _logger;
-    private readonly IObjectMapper _mapper;
- 
+    private readonly IRepository<Product, Guid> _basketProductRepository;
+    public BasketProductService(IRepository<Product, Guid> basketProductRepository)
+	{
+        _basketProductRepository = basketProductRepository;
+	}
 
-    public BasketProductService()
-		{
-		}
-
-    public Task<ProductDto> GetAsync(Guid productId)
+    public async Task<ProductDto> GetAsync(Guid id)
     {
-        throw new NotImplementedException();
+        var product = await _basketProductRepository.GetAsync(id);
+        return ObjectMapper.Map<Product, ProductDto>(product);
+
     }
 }
 

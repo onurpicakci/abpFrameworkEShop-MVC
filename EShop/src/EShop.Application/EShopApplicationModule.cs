@@ -8,6 +8,10 @@ using Volo.Abp.SettingManagement;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.BlobStoring;
 using EShop.Files;
+using Volo.Abp.Caching;
+using EShop.Baskets;
+using Microsoft.Extensions.Caching.Distributed;
+using System;
 
 namespace EShop;
 
@@ -19,7 +23,8 @@ namespace EShop;
     typeof(AbpPermissionManagementApplicationModule),
     typeof(AbpTenantManagementApplicationModule),
     typeof(AbpFeatureManagementApplicationModule),
-    typeof(AbpSettingManagementApplicationModule)
+    typeof(AbpSettingManagementApplicationModule),
+    typeof(AbpCachingModule)
     )]
 [DependsOn(typeof(AbpBlobStoringModule))]
     public class EShopApplicationModule : AbpModule
@@ -29,6 +34,27 @@ namespace EShop;
         Configure<AbpAutoMapperOptions>(options =>
         {
             options.AddMaps<EShopApplicationModule>();
+        });
+
+        ConfigureDistributedCache();
+    }
+
+    private void ConfigureDistributedCache()
+    {
+        Configure<AbpDistributedCacheOptions>(options =>
+        {
+            options.CacheConfigurators.Add(cacheName =>
+            {
+                if (cacheName == CacheNameAttribute.GetCacheName(typeof(Basket)))
+                {
+                    return new DistributedCacheEntryOptions
+                    {
+                        SlidingExpiration = TimeSpan.FromDays(7)
+                    };
+                }
+
+                return null;
+            });
         });
     }
 }

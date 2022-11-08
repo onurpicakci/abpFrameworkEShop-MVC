@@ -21,6 +21,7 @@
         "Permission:Category.Create": "Creating new categories",
         "Permission:Category.Edit": "Editing the categories",
         "Index:AddToBasket": "Add To Basket",
+        "Index:OutOfStock": "Out Of Stock",
         "Menu:Basket": "Basket",
         "Menu:Category": "Categories"
 

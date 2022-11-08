@@ -3,6 +3,7 @@ using EShop.Baskets;
 using EShop.Categories;
 using EShop.Customers;
 using EShop.Products;
+using Volo.Abp.AutoMapper;
 
 namespace EShop;
 

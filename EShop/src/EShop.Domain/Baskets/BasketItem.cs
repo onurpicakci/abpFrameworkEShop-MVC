@@ -7,8 +7,6 @@ namespace EShop.Baskets
     {
         public Guid ProductId { get; set; }
 
-        public Guid BasketId { get; set; }
-
         public int ProductCount { get; set; }
 
         private BasketItem()

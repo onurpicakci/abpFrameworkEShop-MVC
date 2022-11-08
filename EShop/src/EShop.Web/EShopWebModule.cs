@@ -43,6 +43,7 @@ using Volo.Abp.AspNetCore.Mvc.AntiForgery;
 using System;
 using Volo.Abp.BlobStoring.FileSystem;
 using Volo.Abp.BlobStoring;
+using Volo.Abp.Caching;
 
 namespace EShop.Web;
 
@@ -102,6 +103,8 @@ namespace EShop.Web;
         ConfigureAutoApiControllers();
         ConfigureSwaggerServices(context.Services);
 
+        
+
         Configure<RazorPagesOptions>(options =>
         {
             options.Conventions.AuthorizePage("/Products/Index", EShopPermissions.Products.Default);
@@ -124,7 +127,17 @@ namespace EShop.Web;
             });
         });
 
+        Configure<AbpDistributedCacheOptions>(options => { options.KeyPrefix = "EShop:"; });
 
+
+    }
+
+    private void ConfigureCache(IConfiguration configuration)
+    {
+        Configure<AbpDistributedCacheOptions>(options =>
+        {
+            options.KeyPrefix = "EShop:";
+        });
     }
 
     private void ConfigureAuthentication(ServiceConfigurationContext context)
