@@ -5,9 +5,9 @@ namespace EShop.Baskets
 {
     public class BasketItem : AuditedAggregateRoot<Guid>
     {
-        public Guid ProductId { get; set; }
+        public Guid ProductId { get; private set; }
 
-        public int ProductCount { get; set; }
+        public int ProductCount { get; internal set; }
 
         private BasketItem()
         {

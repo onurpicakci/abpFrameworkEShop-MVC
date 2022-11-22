@@ -21,6 +21,7 @@
             <abp-column size-md="_6" class="text-end">
                 @if (await AuthorizationService.IsGrantedAsync(EShopPermissions.Products.Create))
                 {
+                       
                     <abp-button id="NewProductButton"
                                 text="@L["NewProduct"].Value"
                                 icon="plus"

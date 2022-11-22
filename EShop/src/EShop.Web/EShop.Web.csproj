@@ -23,6 +23,14 @@
     <None Remove="Pages\Baskets\" />
     <None Remove="Pages\Categories\" />
     <None Remove="ProductImages\" />
+    <Compile Remove="Themes\Basic\Layouts\**" />
+    <EmbeddedResource Remove="Themes\Basic\Layouts\**" />
+    <None Remove="Themes\Basic\Layouts\**" />
+    <Content Remove="Themes\Basic\Layouts\**" />
+    <Compile Remove="Themes\Basic\**" />
+    <EmbeddedResource Remove="Themes\Basic\**" />
+    <None Remove="Themes\Basic\**" />
+    <Content Remove="Themes\Basic\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,13 +52,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="6.0.1" />
     <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
-    <PackageReference Include="Volo.Abp.BlobStoring.FileSystem" Version="6.0.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" Version="6.0.1" />
+    <PackageReference Include="Volo.Abp.BlobStoring.FileSystem" Version="6.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite" Version="1.0.0-rc.*" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -72,13 +81,13 @@
       <ReferenceSourceTarget>ProjectReference</ReferenceSourceTarget>
       <GlobalPropertiesToRemove>;WebPublishProfileFile</GlobalPropertiesToRemove>
     </ProjectReference>
-    <PackageReference Include="Volo.Abp.Autofac" Version="6.0.0" />
-    <PackageReference Include="Volo.Abp.Swashbuckle" Version="6.0.0" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="6.0.0" />
-    <PackageReference Include="Volo.Abp.Identity.Web" Version="6.0.0" />
-    <PackageReference Include="Volo.Abp.Account.Web.OpenIddict" Version="6.0.0" />
-    <PackageReference Include="Volo.Abp.TenantManagement.Web" Version="6.0.0" />
-    <PackageReference Include="Volo.Abp.SettingManagement.Web" Version="6.0.0" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="6.0.1" />
+    <PackageReference Include="Volo.Abp.Swashbuckle" Version="6.0.1" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="6.0.1" />
+    <PackageReference Include="Volo.Abp.Identity.Web" Version="6.0.1" />
+    <PackageReference Include="Volo.Abp.Account.Web.OpenIddict" Version="6.0.1" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Web" Version="6.0.1" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Web" Version="6.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -86,5 +95,9 @@
     <Folder Include="Pages\Baskets\" />
     <Folder Include="Pages\Categories\" />
     <Folder Include="ProductImages\" />
+    <Folder Include="Themes" />
+    <Folder Include="Themes\" />
+    <Folder Include="Themes\Basic\" />
+    <Folder Include="Themes\Basic\Layouts\" />
   </ItemGroup>
 </Project>
