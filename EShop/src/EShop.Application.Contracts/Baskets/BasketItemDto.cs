@@ -10,5 +10,9 @@ public class BasketItemDto : AuditedEntityDto<Guid>
     public int ProductCount { get; set; }
 
     public float TotalPrice { get; set; }
+
+    public string ImageName { get; set; }
+
+    public string ProductName { get; set; }
 }
 

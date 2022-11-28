@@ -15,7 +15,7 @@ public class BasketItemAppService :
     IBasketItemAppService
 
 {
-    public BasketItemAppService(IRepository<BasketItem,Guid> repository)
+    public BasketItemAppService(IRepository<BasketItem,Guid > repository)
         : base(repository)
     {
     }

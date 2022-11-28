@@ -40,6 +40,7 @@ public class ProductAppService
         var queryable = await base.Repository.GetQueryableAsync();
         var query = queryable.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), Product => Product.Name.ToLower()
             .Contains(input.Filter.ToLower()));
+            
 
         var count = await AsyncExecuter.CountAsync(query);
         var products = await AsyncExecuter.ToListAsync(query);

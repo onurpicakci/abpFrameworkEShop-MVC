@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Volo.Abp.Domain.Entities;
 using Volo.Abp.Domain.Entities.Auditing;
 
 namespace EShop.Baskets;
@@ -30,9 +31,11 @@ public class Basket : AuditedAggregateRoot<Guid>
         }
 
         var item = BasketItems.FirstOrDefault(x => x.ProductId == productId);
+        
         if (item == null)
         {
             BasketItems.Add(new BasketItem(productId, count));
+            item.ProductCount -= count;
         }
         else
         {

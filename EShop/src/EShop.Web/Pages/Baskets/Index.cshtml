@@ -2,21 +2,85 @@
 @using EShop.Web.Pages.Baskets
 @using Volo.Abp.Users
 @using EShop.Localization
+@using System.Globalization
+@using Microsoft.Extensions.Options
 @using Microsoft.Extensions.Localization
+@using Volo.Abp.Http.Client
 @model EShop.Web.Pages.Baskets.IndexModel
 @inject IStringLocalizer<EShopResource> L
 @inject CurrentUser CurrentUser
+@{
+    const int productsColumnSize = 10;
+}
 @section scripts
 {
     <abp-script src="/Pages/Baskets/Index.js"></abp-script>
 }
 
-    <div class="row">
-        <div id="BasketArea" class="pt-5">
-            
-        </div>
-    </div>
-       
-    
+<div>
+    @if (!Model.Baskets.Any())
+        {
+            <div class="basket-list">
+                <abp-row>
+                    <abp-card>
+                        <abp-card-body>
+                            <h3 style="text-align: center">@L["EmptyBasket"]</h3>
+                            <br />
+                            <div style="text-align: center">
+                                <span>
+                                    @L["CheckOtherProducts"] <a href="/">@L["ContinueShopping"]</a>
+                                </span>
+                            </div>
+
+                        </abp-card-body>
+                    </abp-card>
+                </abp-row>
+            </div>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="basket-list flex-container vertica">
+                        @foreach (var item in Model.Baskets)
+                        {
+                                    var price = item.TotalPrice.ToString("0.00");
+                                    <div class="card basket-list item" data-product-id="@item.Id"></div>
+                                    <div class="card-body">
+                                        <div class="flex-container-horizontal">
+                                            <div class="image-container flex-item">
+                                                <img class="basket-item-image" src="https://localhost:44368/api/app/file/image?fileName=@item.Id" />
+                                            </div>
+                                            <div class="flex-item">
+                                                <div class="flex-container vertical description-container">
+                                                    <div class="flex-item description-header">
+                                                        <span></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            }
+                    </div>
+                </div>
+            </div>
+        }
+</div> 
+
+
+<!--<abp-card>
+    <abp-card-header>
+        <abp-row>
+            <abp-column size-md="_6">
+                <abp-card-title>@L["Basket"]</abp-card-title>
+            </abp-column>
+        </abp-row>
+    </abp-card-header>
+    <abp-card-body>
+        <abp-table striped-rows="true" id="BasketTable"></abp-table>
+    </abp-card-body>
+</abp-card>-->
+
+
 
 

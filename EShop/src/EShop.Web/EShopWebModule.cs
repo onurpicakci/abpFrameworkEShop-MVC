@@ -44,6 +44,8 @@ using System;
 using Volo.Abp.BlobStoring.FileSystem;
 using Volo.Abp.BlobStoring;
 using Volo.Abp.Caching;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
+using Volo.Abp.AspNetCore.Mvc.UI.Theming;
 
 namespace EShop.Web;
 
@@ -103,7 +105,10 @@ namespace EShop.Web;
         ConfigureAutoApiControllers();
         ConfigureSwaggerServices(context.Services);
 
-        
+        Configure<AbpThemingOptions>(options =>
+        {
+            options.Themes.Add<BasicTheme>();
+        });
 
         Configure<RazorPagesOptions>(options =>
         {
@@ -165,6 +170,8 @@ namespace EShop.Web;
                 }
             );
         });
+
+
     }
     
     private void ConfigureAutoMapper()

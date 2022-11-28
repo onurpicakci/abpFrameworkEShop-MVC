@@ -26,6 +26,9 @@
             $formCreate.ajaxSubmit({
                 success: function (result) {
                     uploadImage(result.id);
+                    abp.notify.success(l('SuccessfullySaved'));
+                    abp.ui.clearBusy();
+                    location.href = "../../Products";
                   
                 },
                 error: function (result) {

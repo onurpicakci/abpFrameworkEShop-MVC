@@ -22,6 +22,8 @@ namespace EShop.Products
 
         public virtual Category Category { get; set; }
 
+
+
         
         
     }
