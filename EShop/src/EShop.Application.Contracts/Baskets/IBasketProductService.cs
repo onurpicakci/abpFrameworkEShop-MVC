@@ -12,5 +12,6 @@ public interface IBasketProductService
     Task<ProductDto> GetAsync(Guid id);
 
     Task<ListResultDto<BasketDto>> GetListAsync();
+    Task<ListResultDto<BasketItemDto>> GetLisAsync();
 }
 

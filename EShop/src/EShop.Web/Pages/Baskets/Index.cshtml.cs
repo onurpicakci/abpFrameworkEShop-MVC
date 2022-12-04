@@ -18,6 +18,8 @@ public class IndexModel : AbpPageModel
 
     public IReadOnlyList<ProductDto> Products { get; set; }
     public IReadOnlyList<BasketDto> Baskets { get; set; }
+    public IReadOnlyList<BasketItemDto> BasketItems { get; set; }
+
     public bool HasRemoteServiceError { get; set; } = false;
 
     private readonly IProductAppService _productAppService;
@@ -38,6 +40,7 @@ public class IndexModel : AbpPageModel
         {
             Products = (await _publicproductAppService.GetListAsync()).Items;
             Baskets = (await _basketProductService.GetListAsync()).Items;
+            BasketItems = (await _basketProductService.GetLisAsync()).Items;
         }
         catch (Exception ex)
         {

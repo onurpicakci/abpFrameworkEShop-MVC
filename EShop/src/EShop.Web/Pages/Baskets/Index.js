@@ -1,32 +1,17 @@
 ﻿$(function () {
-    var l = abp.localization.getResource('EShop');
 
-    var dataTable = $('#BasketTable').DataTable(
-        abp.libs.datatables.normalizeConfiguration({
-            serverSide: false,
-            paging: true,
-            order: [[1, "asc"]],
-            searching: true,
-            scrollX: true,
-            ajax: abp.libs.datatables.createAjax(eShop.baskets.basketItem.getList),
-            columnDefs: [
-             
-                    
-                {
-                    title: l('ProductId'),
-                    data: "productId"
-                },
-                {
-                    title: l('ProductCount'),
-                    data: "productCount"
-                },
-
-                {
-                    title: l('CreationTime'), data: "creationTime",
-                    dataFormat: "datetime"
-
-                }
-            ]
-        })
-    );
+    var init = $(function (filter) {
+        $('.basket-item-remove').click(function () {
+            let $this = $(this);
+            let productId = $this.parents('.basket-list-item').attr('data-product-id');
+            eShop.baskets.basket.removeProduct({
+                productId: productId,
+            }).then(function () {
+                abp.notify.success("Removed the product from your basket.", "Removed basket item");
+            });
+        });
+    });
+    return {
+        init: init
+    };
 });

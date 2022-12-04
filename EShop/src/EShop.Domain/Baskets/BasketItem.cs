@@ -9,6 +9,10 @@ namespace EShop.Baskets
 
         public int ProductCount { get; set; }
 
+        public float TotalPrice { get; set; }
+
+        public string ProductName { get; set; }
+
 
         private BasketItem()
         {

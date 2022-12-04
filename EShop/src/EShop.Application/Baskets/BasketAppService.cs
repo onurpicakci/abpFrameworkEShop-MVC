@@ -38,10 +38,10 @@ public class BasketAppService : ApplicationService, IBasketAppService
             await _basketRepository.InsertAsync(basketItem);
             
         }
-        /*if (basketItem.GetProductCount(input.ProductId) >= product.StockCount)
+        if (basketItem.GetProductCount(input.ProductId) >= product.StockCount)
         {
             throw new UserFriendlyException("There is not enough product in stock, sorry");
-        }*/
+        }
 
         basketItem.AddProduct(input.ProductId);
 
@@ -70,17 +70,22 @@ public class BasketAppService : ApplicationService, IBasketAppService
 
     public async Task<BasketDto> RemoveProductAsync(RemoveProductDto input)
     {
-        Guid userId = CurrentUser.GetId();
-
-        var basket = new Basket(input.ProductId);
-        await _basketRepository.DeleteAsync(basket);
+        var basketItems = (await _basketRepository.WithDetailsAsync(x => x.BasketItems)).ToList();
+        var basketItem = basketItems.FirstOrDefault(x => x.BasketItems.Any(y => y.ProductId == input.ProductId));
         var product = await _basketProductService.GetAsync(input.ProductId);
 
-        basket.RemoveProduct(product.Id, input.ProductCount);
+        if (basketItem == null)
+        {
+            basketItem = (new Basket(Guid.NewGuid()) { BasketItems = new List<BasketItem>() { new BasketItem(input.ProductId) } });
+            await _basketRepository.InsertAsync(basketItem);
 
-        await _basketRepository.DeleteAsync(basket);
+        }
 
-        return await GetBasketDtoAsync(basket);
+        basketItem.RemoveProduct(product.Id, input.ProductCount);
+
+        await _basketRepository.DeleteAsync(basketItem);
+
+        return await GetBasketDtoAsync(basketItem);
     }
 
     private async Task<BasketDto>GetBasketDtoAsync(Basket basket)
@@ -109,6 +114,7 @@ public class BasketAppService : ApplicationService, IBasketAppService
             {
                 ProductId = basketItem.ProductId,
                 ProductCount = basketItem.ProductCount,
+                ProductName = productDto.Name,
                 TotalPrice = productDto.Price * basketItem.ProductCount,
 
             });

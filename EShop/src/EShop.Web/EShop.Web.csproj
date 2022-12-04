@@ -32,10 +32,10 @@
     <None Remove="Themes\Basic\**" />
     <Content Remove="Themes\Basic\**" />
     <None Remove="Themes\LeptonX\Layouts\Application\" />
+    <None Remove="ProductImages\host\my-image-container\" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="ProductImages\laptop.jpeg" />
     <None Include="Pages\Products\create.js" />
     <None Include="Pages\Products\Edit.js" />
   </ItemGroup>
@@ -43,12 +43,6 @@
     <None Update="Pages\**\*.js">
     </None>
     <None Update="Pages\**\*.css">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="ProductImages\readme.txt">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>
   </ItemGroup>
 
@@ -100,5 +94,6 @@
     <Folder Include="Themes\" />
     <Folder Include="Themes\LeptonXLite\Layouts\" />
     <Folder Include="Themes\LeptonXLite\Layouts\Application\" />
+    <Folder Include="ProductImages\host\my-image-container\" />
   </ItemGroup>
 </Project>
