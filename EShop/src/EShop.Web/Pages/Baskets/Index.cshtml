@@ -19,9 +19,13 @@
 {
     <abp-script src="/Pages/Baskets/Index.js"></abp-script>
 }
+@{
+    var totalCount = Model?.BasketItems.Count ?? 0;
+    
+}
 
 <div>
-    @if (!Model.BasketItems.Any())
+    @if (!Model.Baskets.Any())
     {
         <div class="basket-list">
             <abp-row>
@@ -45,9 +49,9 @@
         <div class="row">
             <div class="col-lg-9">
                 <div class="basket-list flex-container vertical">
-                    @foreach (var items in Model.BasketItems)
+                    @foreach (var item in Model.Baskets)
                     {
-                        @foreach (var item in Model.Baskets)
+                        @foreach (var items in Model.BasketItems)
                         {
                             var price = item.TotalPrice.ToString("0.00");
                             <div class="card basket-list-item" data-product-id="@items.ProductId">
@@ -59,6 +63,9 @@
                                         <div class="flex-item">
                                             <div class="flex-container vertical description-container">
                                                 <div class="flex-item description-header">
+                                                    <span>ProductName</span>
+                                                </div>
+                                                <div class="flex-item description-price">
                                                     <span>@price</span>
                                                 </div>
                                                 <div class="flex-item description-cargo">
@@ -86,11 +93,27 @@
                                     </div>
                                 </div>
                             </div>
+                            <hr />
                         }
                     }
                 </div>
             </div>
         </div>
+
+        <div class="col-lg-3 sticky">
+        <div class="card">
+            <div class="card-body">
+                <div style="text-align: center; padding-top: 25px">
+                    <div class="row">
+                        <h5>@L["TotalSelected",totalCount]</h5>
+                    </div>
+                    <div class="row">
+                        <h3>price</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     }
 </div>
 

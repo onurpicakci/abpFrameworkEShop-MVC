@@ -17,11 +17,13 @@ public class BasketAppService : ApplicationService, IBasketAppService
 
     private readonly IBasketProductService _basketProductService;
     private readonly IRepository<Basket, Guid> _basketRepository;
+    private readonly IRepository<BasketItem, Guid> _basketItemRepository;
 
-    public BasketAppService(IBasketProductService basketProductAppService, IRepository<Basket, Guid> basketRepository)
+    public BasketAppService(IBasketProductService basketProductAppService, IRepository<Basket, Guid> basketRepository, IRepository<BasketItem, Guid> basketItemRepository)
     {
         _basketRepository = basketRepository;
         _basketProductService = basketProductAppService;
+        _basketItemRepository = basketItemRepository;
     }
 
     public async Task<BasketDto> AddProductAsync(AddProductDto input)
@@ -72,17 +74,16 @@ public class BasketAppService : ApplicationService, IBasketAppService
     {
         var basketItems = (await _basketRepository.WithDetailsAsync(x => x.BasketItems)).ToList();
         var basketItem = basketItems.FirstOrDefault(x => x.BasketItems.Any(y => y.ProductId == input.ProductId));
-        var product = await _basketProductService.GetAsync(input.ProductId);
 
+  
         if (basketItem == null)
         {
             basketItem = (new Basket(Guid.NewGuid()) { BasketItems = new List<BasketItem>() { new BasketItem(input.ProductId) } });
-            await _basketRepository.InsertAsync(basketItem);
-
+            await _basketRepository.DeleteAsync(basketItem);
         }
 
-        basketItem.RemoveProduct(product.Id, input.ProductCount);
-
+        basketItem.RemoveProduct(basketItem.Id, input.ProductCount);
+        
         await _basketRepository.DeleteAsync(basketItem);
 
         return await GetBasketDtoAsync(basketItem);
