@@ -7,10 +7,11 @@ public class BasketItemDto : AuditedEntityDto<Guid>
 {
     public Guid ProductId { get; set; }
 
-    public Guid BasketId { get; set; }
-
-    public string ProductCode { get; set; }
-
     public int ProductCount { get; set; }
-}
 
+    public float TotalPrice { get; set; }
+
+    public string ImageName { get; set; }
+
+    public string ProductName { get; set; }
+}

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using EShop.Products;
 using Volo.Abp;
@@ -7,36 +8,47 @@ using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Users;
+using static EShop.Permissions.EShopPermissions;
 
 namespace EShop.Baskets;
 
 public class BasketAppService : ApplicationService, IBasketAppService
 {
 
-    private readonly IBasketRepository _basketRepository;
     private readonly IBasketProductService _basketProductService;
+    private readonly IRepository<Basket, Guid> _basketRepository;
+    private readonly IRepository<BasketItem, Guid> _basketItemRepository;
 
-    public BasketAppService(IBasketRepository basketRepository, IBasketProductService basketProductAppService)
+    public BasketAppService(IBasketProductService basketProductAppService, IRepository<Basket, Guid> basketRepository, IRepository<BasketItem, Guid> basketItemRepository)
     {
         _basketRepository = basketRepository;
         _basketProductService = basketProductAppService;
+        _basketItemRepository = basketItemRepository;
     }
 
     public async Task<BasketDto> AddProductAsync(AddProductDto input)
     {
-        Guid userId = CurrentUser.GetId();
 
-        var basket = await _basketRepository.GetAsync(userId);
+        var basketItems = (await _basketRepository.WithDetailsAsync(x => x.BasketItems)).ToList();
+        var basketItem = basketItems.FirstOrDefault(x => x.BasketItems.Any(y => y.ProductId == input.ProductId));
+
         var product = await _basketProductService.GetAsync(input.ProductId);
 
-        if (basket.GetProductCount(product.Id) >= product.StockCount)
+        if (basketItem == null)
         {
-            throw new UserFriendlyException("There is not enough product in stock, sorry :(");
+            basketItem = (new Basket(Guid.NewGuid()) { BasketItems = new List<BasketItem>() { new BasketItem(input.ProductId) } });
+            await _basketRepository.InsertAsync(basketItem);
+
+        }
+        if (basketItem.GetProductCount(input.ProductId) >= product.StockCount)
+        {
+            throw new UserFriendlyException("There is not enough product in stock, sorry");
         }
 
-        basket.AddProduct(product.Id);
+        basketItem.AddProduct(input.ProductId);
 
-        return await GetBasketDtoAsync(basket);
+        return await GetBasketDtoAsync(basketItem);
+
     }
 
     public async Task<BasketDto> GetAsync(Guid? id)
@@ -47,6 +59,10 @@ public class BasketAppService : ApplicationService, IBasketAppService
             var idUserBasket = await _basketRepository.GetAsync(id.Value);
 
             userBasket.Merge(idUserBasket);
+            await _basketRepository.UpdateAsync(userBasket);
+
+            userBasket.Clear();
+            await _basketRepository.UpdateAsync(idUserBasket);
 
             return await GetBasketDtoAsync(userBasket);
         }
@@ -54,9 +70,26 @@ public class BasketAppService : ApplicationService, IBasketAppService
         return await GetBasketDtoAsync(await _basketRepository.GetAsync(CurrentUser.GetId()));
     }
 
-   
+    public async Task<BasketDto> RemoveProductAsync(RemoveProductDto input)
+    {
+        var basketItems = (await _basketRepository.WithDetailsAsync(x => x.BasketItems)).ToList();
+        var basketItem = basketItems.FirstOrDefault(x => x.BasketItems.Any(y => y.ProductId == input.ProductId));
 
-    private async Task<BasketDto>GetBasketDtoAsync(Basket basket)
+
+        if (basketItem == null)
+        {
+            basketItem = (new Basket(Guid.NewGuid()) { BasketItems = new List<BasketItem>() { new BasketItem(input.ProductId) } });
+            await _basketRepository.DeleteAsync(basketItem);
+        }
+
+        basketItem.RemoveProduct(basketItem.Id, input.ProductCount);
+
+        await _basketRepository.DeleteAsync(basketItem);
+
+        return await GetBasketDtoAsync(basketItem);
+    }
+
+    private async Task<BasketDto> GetBasketDtoAsync(Basket basket)
     {
         var products = new Dictionary<Guid, ProductDto>();
         var basketDto = new BasketDto();
@@ -74,20 +107,27 @@ public class BasketAppService : ApplicationService, IBasketAppService
 
             if (basketItem.ProductCount > productDto.StockCount)
             {
+                basket.RemoveProduct(basketItem.ProductId, basketItem.ProductCount - productDto.StockCount);
                 basketChanged = true;
             }
 
             basketDto.BasketItems.Add(new BasketItemDto
             {
                 ProductId = basketItem.ProductId,
-                BasketId =  basketItem.Id,
                 ProductCount = basketItem.ProductCount,
-                ProductCode = productDto.Code,
+                ProductName = productDto.Name,
+                TotalPrice = productDto.Price * basketItem.ProductCount,
 
             });
+        }
+
+        basketDto.TotalPrice = basketDto.BasketItems.Sum(x => x.TotalPrice);
+
+        if (basketChanged)
+        {
+            await _basketRepository.UpdateAsync(basket);
         }
 
         return basketDto;
     }
 }
-

@@ -6,8 +6,7 @@ namespace EShop.Baskets;
 
 public class BasketDto : AuditedEntityDto<Guid>
 {
- 
-
+    public float TotalPrice { get; set; }
     public List<BasketItemDto> BasketItems { get; set; }
 
     public BasketDto()
@@ -15,4 +14,3 @@ public class BasketDto : AuditedEntityDto<Guid>
         BasketItems = new List<BasketItemDto>();
     }
 }
-

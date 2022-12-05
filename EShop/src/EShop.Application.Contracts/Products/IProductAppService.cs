@@ -11,9 +11,8 @@ public interface IProductAppService
     : ICrudAppService<
         ProductDto,
         Guid,
-        PagedAndSortedResultRequestDto,
+        MySearchFilterDto,
         CreateUpdateProductDto>
 {
-    
-}
 
+}

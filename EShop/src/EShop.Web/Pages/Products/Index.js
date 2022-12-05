@@ -1,14 +1,20 @@
 ﻿$(function () {
     var l = abp.localization.getResource('EShop');
 
+    var getFilter = function () {
+        return {
+            filter: $("input[name='Search'").val(),
+        };
+    };
+
     var dataTable = $('#ProductsTable').DataTable(
         abp.libs.datatables.normalizeConfiguration({
-            serverSide: true,
+            serverSide: false,
             paging: true,
             order: [[1, "asc"]],
-            searching: false,
+            searching: true,
             scrollX: true,
-            ajax: abp.libs.datatables.createAjax(eShop.products.product.getList),
+            ajax: abp.libs.datatables.createAjax(eShop.products.product.getList, getFilter),
             columnDefs: [
                 {
                     ttitle: l('Actions'),
@@ -72,34 +78,23 @@
                     title: l('ImageName'),
                     data: "imageName"
                 },
-     
+
                 {
                     title: l('CreationTime'), data: "creationTime",
-                    dataFormat:"datetime"
-                    
+                    dataFormat: "datetime"
+
                 }
             ]
         })
     );
-    
+
     $('#NewProductButton').click(function (e) {
         e.preventDefault();
 
         window.location.href = "Products/Create"
     });
 
-    $(function () {
-        $('.add-basket-button').click(function () {
-            var $this = $(this);
-            var productId = $this.attr('data-product-id');
-            eShop.baskets.basket.addProduct({
-                productId: productId,
-            }).then(function () {
-                abp.notify.success("Added product to your basket.", "Successfully added");
-            });
-
-        });
+    $("input[name='Search'").change(function () {
+        dataTable.ajax.reload();
     });
-
 });
-

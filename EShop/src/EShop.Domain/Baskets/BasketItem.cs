@@ -7,9 +7,12 @@ namespace EShop.Baskets
     {
         public Guid ProductId { get; set; }
 
-        public Guid BasketId { get; set; }
-
         public int ProductCount { get; set; }
+
+        public float TotalPrice { get; set; }
+
+        public string ProductName { get; set; }
+
 
         private BasketItem()
         {
@@ -24,4 +27,3 @@ namespace EShop.Baskets
 
     }
 }
-

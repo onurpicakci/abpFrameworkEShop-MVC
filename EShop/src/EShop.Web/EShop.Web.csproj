@@ -23,6 +23,7 @@
     <None Remove="Pages\Baskets\" />
     <None Remove="Pages\Categories\" />
     <None Remove="ProductImages\" />
+    <None Remove="ProductImages\host\my-image-container\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,7 +35,6 @@
     <None Update="Pages\**\*.js">
     </None>
     <None Update="Pages\**\*.css">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="ProductImages\readme.txt">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
@@ -86,5 +86,6 @@
     <Folder Include="Pages\Baskets\" />
     <Folder Include="Pages\Categories\" />
     <Folder Include="ProductImages\" />
+    <Folder Include="ProductImages\host\my-image-container\" />
   </ItemGroup>
 </Project>
