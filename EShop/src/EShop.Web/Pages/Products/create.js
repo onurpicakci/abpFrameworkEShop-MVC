@@ -32,7 +32,7 @@
                   
                 },
                 error: function (result) {
-                    abp.notify.error(result.responseJSON.error.message);
+                    abp.notify.error(result);
                     abp.ui.clearBusy();
                 }
             });

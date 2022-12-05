@@ -18,7 +18,7 @@
     "EShop.Web": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:44368/",
+      "applicationUrl": "http://localhost:25767",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

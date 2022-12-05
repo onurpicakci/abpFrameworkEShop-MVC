@@ -23,7 +23,13 @@
         "Index:AddToBasket": "Add To Basket",
         "Index:OutOfStock": "Out Of Stock",
         "Menu:Basket": "Basket",
-        "Menu:Category": "Categories"
+        "Menu:Category": "Categories",
+        "Purchase:OrderSummary": "Order Summary",
+        "Purchase:Products": "Products",
+        "Purchase:Cargo": "Cargo",
+        "Purchase:Total": "Total",
+        "Purchase:GiftCards": "Gift Card",
+        "Purchase:OrderTotal": "Order Total"
 
 
     }

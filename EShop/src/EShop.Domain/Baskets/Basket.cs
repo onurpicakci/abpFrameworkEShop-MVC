@@ -35,7 +35,6 @@ public class Basket : AuditedAggregateRoot<Guid>
         if (item == null)
         {
             BasketItems.Add(new BasketItem(productId, count));
-            item.ProductCount -= count;
         }
         else
         {

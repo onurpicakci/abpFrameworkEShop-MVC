@@ -6,6 +6,7 @@ using Volo.Abp.Domain.Repositories;
 using Volo.Abp.BlobStoring;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Application.Dtos;
+using System.Net.Mime;
 
 namespace EShop.Files;
 
@@ -22,6 +23,9 @@ public class FileAppService : EShopAppService ,IFileAppService
     public async Task<RemoteStreamContent> GetImageAsync(string fileName)
     {
         var stream = await _blobContainer.GetAsync(fileName);
+
+        stream.Position = 0;
+
 
         return new RemoteStreamContent(stream, fileName, "image/*");
     }

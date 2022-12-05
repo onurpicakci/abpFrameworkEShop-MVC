@@ -44,7 +44,7 @@ public class BasketAppService : ApplicationService, IBasketAppService
         {
             throw new UserFriendlyException("There is not enough product in stock, sorry");
         }
-
+ 
         basketItem.AddProduct(input.ProductId);
 
         return await GetBasketDtoAsync(basketItem);
