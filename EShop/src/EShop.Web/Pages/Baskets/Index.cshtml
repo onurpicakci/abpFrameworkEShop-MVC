@@ -47,7 +47,7 @@
                 <div class="basket-list flex-container vertical">
                     @foreach (var items in Model.BasketItems)
                     {
-                            var price = items.TotalPrice.ToString("0.00");
+                            var price = (items.TotalPrice * items.ProductCount).ToString("0.00");
                             <div class="card basket-list-item" data-product-id="@items.ProductId">
                                 <div class="card-body">
                                     <div class="flex-container horizontal">
@@ -100,7 +100,7 @@
                         @foreach (var item in Model.BasketItems)
                         {
                             var totalCount = item.ProductCount;
-                            var totalPrice = item.TotalPrice;
+                            var totalPrice = item.TotalPrice * totalCount;
                             var discountPercentage = 10;
                             var discountTotal = totalPrice * discountPercentage / 100;
                             var grandTotal = totalPrice - discountTotal;
