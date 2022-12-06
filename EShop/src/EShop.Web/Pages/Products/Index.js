@@ -78,16 +78,16 @@
                     title: l('ImageName'),
                     data: "imageName"
                 },
-
+     
                 {
                     title: l('CreationTime'), data: "creationTime",
-                    dataFormat: "datetime"
-
+                    dataFormat:"datetime"
+                    
                 }
             ]
         })
     );
-
+    
     $('#NewProductButton').click(function (e) {
         e.preventDefault();
 
@@ -98,3 +98,4 @@
         dataTable.ajax.reload();
     });
 });
+

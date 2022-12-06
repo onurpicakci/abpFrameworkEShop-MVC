@@ -36,7 +36,9 @@ public class BasketAppService : ApplicationService, IBasketAppService
 
         if (basketItem == null)
         {
-            basketItem = (new Basket(Guid.NewGuid()) { BasketItems = new List<BasketItem>() { new BasketItem(input.ProductId) } });
+            basketItem = (new Basket(Guid.NewGuid()) {
+                BasketItems = new List<BasketItem>() {
+                    new BasketItem(input.ProductId) } });
             await _basketRepository.InsertAsync(basketItem);
 
         }

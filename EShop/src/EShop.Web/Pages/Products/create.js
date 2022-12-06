@@ -25,6 +25,7 @@
 
             $formCreate.ajaxSubmit({
                 success: function (result) {
+                    abp.notify.success(l('SuccessfullySaved'));
                     uploadImage(result.id);
                   
                 },

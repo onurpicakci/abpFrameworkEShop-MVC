@@ -53,7 +53,7 @@
 .basket-item-image {
     min-width: 1em;
     width: 2em;
-    max-width: 80%;
+    max-width: 100%;
 }
 
 .description-container {

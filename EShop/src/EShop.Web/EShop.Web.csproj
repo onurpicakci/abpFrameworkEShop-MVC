@@ -24,6 +24,7 @@
     <None Remove="Pages\Categories\" />
     <None Remove="ProductImages\" />
     <None Remove="ProductImages\host\my-image-container\" />
+    <None Remove="Pages\Payments\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -87,5 +88,6 @@
     <Folder Include="Pages\Categories\" />
     <Folder Include="ProductImages\" />
     <Folder Include="ProductImages\host\my-image-container\" />
+    <Folder Include="Pages\Payments\" />
   </ItemGroup>
 </Project>

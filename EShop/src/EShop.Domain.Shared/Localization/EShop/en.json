@@ -10,8 +10,11 @@
         "ProductCode": "Product Code",
         "ProductDescription": "Product Description",
         "Price": "Price",
+        "TotalSelected": "Total Selected",
+        "NewProduct": "New Product",
         "StockCount": "Stock Count",
         "CreationTime": "Creation Time",
+        "Description": "Confirm Basket",
         "Permission:EShop": "E Shop",
         "Permission:Product": "Product Management",
         "Permission:Product.Create": "Creating new products",
@@ -21,9 +24,14 @@
         "Permission:Category.Create": "Creating new categories",
         "Permission:Category.Edit": "Editing the categories",
         "Index:AddToBasket": "Add To Basket",
+        "Index:OutOfStock": "Out Of Stock",
         "Menu:Basket": "Basket",
-        "Menu:Category": "Categories"
-
-
+        "Menu:Category": "Categories",
+        "Purchase:OrderSummary": "Order Summary",
+        "Purchase:Products": "Products",
+        "Purchase:Cargo": "Cargo",
+        "Purchase:Total": "Total",
+        "Purchase:GiftCards": "Gift Card",
+        "Purchase:OrderTotal": "Order Total"
     }
 }

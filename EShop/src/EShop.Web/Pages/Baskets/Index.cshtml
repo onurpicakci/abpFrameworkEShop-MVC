@@ -45,11 +45,9 @@
         <div class="row">
             <div class="col-lg-9">
                 <div class="basket-list flex-container vertical">
-                    @foreach (var item in Model.Baskets)
+                    @foreach (var items in Model.BasketItems)
                     {
-                        @foreach (var items in Model.BasketItems)
-                        {
-                            var price = item.TotalPrice.ToString("0.00");
+                            var price = items.TotalPrice.ToString("0.00");
                             <div class="card basket-list-item" data-product-id="@items.ProductId">
                                 <div class="card-body">
                                     <div class="flex-container horizontal">
@@ -90,7 +88,7 @@
                                 </div>
                             </div>
                             <hr />
-                        }
+                        
                     }
                 </div>
             </div>

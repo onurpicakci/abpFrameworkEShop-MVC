@@ -19,10 +19,12 @@ namespace EShop.Baskets
 
         }
 
-        public BasketItem(Guid productId, int productCount = 1)
+        public BasketItem(Guid productId, int productCount = 1, string productName = null, float price = 0)
         {
             ProductId = productId;
             ProductCount = productCount;
+            ProductName = productName;
+            TotalPrice = price;
         }
 
     }

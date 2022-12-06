@@ -23,7 +23,7 @@ public class Basket : AuditedAggregateRoot<Guid>
         BasketItems = new List<BasketItem>();
     }
 
-    public void AddProduct(Guid productId, int count = 1)
+    public void AddProduct(Guid productId, int count = 1, string productName = null, float price = 0)
     {
         if (count < 1)
         {

@@ -1,8 +1,36 @@
 {
   "culture": "tr",
-  "texts": {
-    "Menu:Home": "Ana sayfa",
-    "Welcome": "Hoşgeldiniz",
-    "LongWelcomeMessage": "Uygulamaya hoşgeldiniz. Bu, ABP framework'ü üzerine bina edilmiş bir başlangıç projesidir. Daha fazla bilgi için abp.io adresini ziyaret edebilirsiniz."
-  }
+    "texts": {
+        "Menu:Home": "Ana sayfa",
+        "Welcome": "Hoşgeldiniz",
+        "LongWelcomeMessage": "Uygulamaya hoşgeldiniz. Bu, ABP framework'ü üzerine bina edilmiş bir başlangıç projesidir. Daha fazla bilgi için abp.io adresini ziyaret edebilirsiniz.",
+        "ProductName": "Ürün Adı",
+        "ProductCode": "Ürün Kodu",
+        "ProductDescription": "Ürün Açıklaması",
+        "CreationTime": "Oluşturulma Zamanı",
+        "Price": "Fiyat",
+        "ImageName": "Resim Adı",
+        "TotalSelected": "Toplam",
+        "NewProduct": "Yeni Ürün",
+        "StockCount": "Stok",
+        "Permission:EShop": "E Shop",
+        "Description": "Sepeti Onayla",
+        "Permission:Product": "Ürün Yönetimi",
+        "Permission:Product.Create": "Yeni ürün",
+        "Permission:Product.Edit": "Ürünleri düzenle",
+        "Permission:Product.Delete": "Ürünleri sil",
+        "Permission:Category": "Kategori Yönetimi",
+        "Permission:Category.Create": "Yeni kategori",
+        "Permission:Category.Edit": "Kategorileri düzenle",
+        "Index:AddToBasket": "Sepete Ekle",
+        "Index:OutOfStock": "Stok Yok",
+        "Menu:Basket": "Sepet",
+        "Menu:Category": "Kategori",
+        "Purchase:OrderSummary": "Sipariş Özeti",
+        "Purchase:Products": "Ürünler",
+        "Purchase:Cargo": "Kargo",
+        "Purchase:Total": "Toplam",
+        "Purchase:GiftCards": "Hediye Kartı",
+        "Purchase:OrderTotal": "Sipariş Toplamı"
+    }
 }
