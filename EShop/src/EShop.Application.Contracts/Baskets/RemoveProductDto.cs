@@ -7,6 +7,5 @@ public class RemoveProductDto
 {
     public Guid ProductId { get; set; }
 
-
     public int? ProductCount { get; set; }
 }

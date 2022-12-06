@@ -34,7 +34,7 @@ public class Basket : AuditedAggregateRoot<Guid>
 
         if (item == null)
         {
-            BasketItems.Add(new BasketItem(productId, count));
+            BasketItems.Add(new BasketItem(productId, count, productName, price));
         }
         else
         {
@@ -42,7 +42,7 @@ public class Basket : AuditedAggregateRoot<Guid>
         }
     }
 
-    public void RemoveProduct(Guid productId, int? count = null)
+    public void RemoveProduct(Guid productId, int? count = null, string productName = null, float price = 0)
     {
         if (count is < 1)
         {

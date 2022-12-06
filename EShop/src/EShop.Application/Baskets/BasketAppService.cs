@@ -38,7 +38,7 @@ public class BasketAppService : ApplicationService, IBasketAppService
         {
             basketItem = (new Basket(Guid.NewGuid()) {
                 BasketItems = new List<BasketItem>() {
-                    new BasketItem(input.ProductId) } });
+                    new BasketItem(input.ProductId,0, product.Name, product.Price) } });
             await _basketRepository.InsertAsync(basketItem);
 
         }
@@ -76,15 +76,14 @@ public class BasketAppService : ApplicationService, IBasketAppService
     {
         var basketItems = (await _basketRepository.WithDetailsAsync(x => x.BasketItems)).ToList();
         var basketItem = basketItems.FirstOrDefault(x => x.BasketItems.Any(y => y.ProductId == input.ProductId));
-
+        var product = await _basketProductService.GetAsync(input.ProductId);
 
         if (basketItem == null)
         {
-            basketItem = (new Basket(Guid.NewGuid()) { BasketItems = new List<BasketItem>() { new BasketItem(input.ProductId) } });
-            await _basketRepository.DeleteAsync(basketItem);
+            
         }
 
-        basketItem.RemoveProduct(basketItem.Id, input.ProductCount);
+        basketItem.RemoveProduct(basketItem.Id, input.ProductCount, product.Name, product.Price);
 
         await _basketRepository.DeleteAsync(basketItem);
 

@@ -93,24 +93,27 @@
                 </div>
             </div>
 
-
+           
             <div class="col-lg-3 sticky">
                 <div class="card">
                     <div class="card-body">
+                        
                         @foreach (var item in Model.BasketItems)
-                        {
-                            var totalCount = item.ProductCount;
-                            var totalPrice = item.TotalPrice * totalCount;
-                            var discountPercentage = 10;
-                            var discountTotal = totalPrice * discountPercentage / 100;
-                            var grandTotal = totalPrice - discountTotal;
+                            {
+
+                                var totalCount = item.ProductCount;
+                                var totalPrice = item.TotalPrice * totalCount;
+                                var discountPercentage = 10;
+                                var discountTotal = totalPrice * discountPercentage / 100;
+                                var grandTotal = totalPrice - discountTotal;
 
                             <div style="text-align: center; padding-top: 25px">
                                 <div class="row">
-                                    <h5>@L["TotalSelected", totalCount]</h5>
+                                    <h5>@L["TotalSelected"]
+                                    @totalCount</h5>
                                 </div>
                                 <div class="row">
-                                    <h3>@totalPrice.ToString("0.00")</h3>
+                                    <h3>@totalPrice.ToString("0.00")&#8378</h3>
                                 </div>
                             </div>
                             <hr />
