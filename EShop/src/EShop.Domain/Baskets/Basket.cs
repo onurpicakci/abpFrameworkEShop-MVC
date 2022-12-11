@@ -50,10 +50,6 @@ public class Basket : AuditedAggregateRoot<Guid>
         }
 
         var item = BasketItems.FirstOrDefault(x => x.ProductId == productId);
-        if (item == null)
-        {
-            return;
-        }
 
         if (count == null || item.ProductCount <= count)
         {

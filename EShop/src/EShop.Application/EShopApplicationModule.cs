@@ -22,6 +22,7 @@ namespace EShop;
     typeof(AbpSettingManagementApplicationModule)
     )]
 [DependsOn(typeof(AbpBlobStoringModule))]
+ 
     public class EShopApplicationModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)

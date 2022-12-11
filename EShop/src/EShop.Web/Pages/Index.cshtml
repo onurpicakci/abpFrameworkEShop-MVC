@@ -54,9 +54,15 @@
                                         <img id="productImage" src="https://localhost:44368/api/app/file/image?fileName=@product.Id" />
                                     </a>
                                     <div class="row mt-5">
-                                        @if (product.StockCount > 0)
+                                        @if (product.StockCount > 0 && CurrentUser.IsAuthenticated)
                                         {
                                             <abp-button class="add-basket-button" button-type="Danger" text="@buyText" data-product-id="@product.Id.ToString()"></abp-button>
+                                        }
+                                        else if (!CurrentUser.IsAuthenticated)
+                                        {
+                                            <a abp-button="Outline_Danger" href="/Account/Login" class="px-4">
+                                                <i class="fa fa-sign-in"></i> @L["Login"]
+                                            </a>
                                         }
                                         else
                                         {

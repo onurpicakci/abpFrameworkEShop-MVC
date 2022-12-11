@@ -25,6 +25,10 @@
     <None Remove="ProductImages\" />
     <None Remove="ProductImages\host\my-image-container\" />
     <None Remove="Pages\Payments\" />
+    <None Remove="Themes\" />
+    <None Remove="Themes\LeptonXLite\" />
+    <None Remove="Themes\LeptonXLite\Components\" />
+    <None Remove="Themes\LeptonXLite\Layouts\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -89,5 +93,9 @@
     <Folder Include="ProductImages\" />
     <Folder Include="ProductImages\host\my-image-container\" />
     <Folder Include="Pages\Payments\" />
+    <Folder Include="Themes\" />
+    <Folder Include="Themes\LeptonXLite\" />
+    <Folder Include="Themes\LeptonXLite\Components\" />
+    <Folder Include="Themes\LeptonXLite\Layouts\" />
   </ItemGroup>
 </Project>
