@@ -4,16 +4,13 @@
 
 namespace EShop.Migrations
 {
-    /// <inheritdoc />
-    public partial class AbpVersionUpgrade7 : Migration
+    public partial class Created_BlobStoring : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
 
         }
 
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
 
