@@ -33,6 +33,7 @@
         "Purchase:Cargo": "Cargo",
         "Purchase:Total": "Total",
         "Purchase:GiftCards": "Gift Card",
-        "Purchase:OrderTotal": "Order Total"
+        "Purchase:OrderTotal": "Order Total",
+        "ProductDeleteMessage": "Are you sure you want to delete the product?"
     }
 }
