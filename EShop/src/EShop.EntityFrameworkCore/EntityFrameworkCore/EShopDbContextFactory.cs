@@ -15,6 +15,8 @@ public class EShopDbContextFactory : IDesignTimeDbContextFactory<EShopDbContext>
         EShopEfCoreEntityExtensionMappings.Configure();
 
         var configuration = BuildConfiguration();
+        
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
         var builder = new DbContextOptionsBuilder<EShopDbContext>()
             .UseSqlServer(configuration.GetConnectionString("Default"));
