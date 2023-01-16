@@ -14,10 +14,11 @@
 }
 
 @section styles {
-    <abp-style src="/Pages/Index.css" />
+    <abp-style src="/Pages/Index.css"/>
 }
+
 @section scripts {
-    <abp-script src="/Pages/Index.js" />
+    <abp-script src="/Pages/Index.js"/>
 }
 
 @if (Model.HasRemoteServiceError)
@@ -47,10 +48,10 @@
                                             <div class="product-info-box">
                                                 <h5>@product.Name</h5>
                                                 <em class="d-block text-muted">@product.Code - @product.ProductDescription - @L["StockCount"]:@product.StockCount</em>
-                                                <br /><br />
+                                                <br/><br/>
                                             </div>
                                         </div>
-                                        <img id="productImage" src="https://localhost:44368/api/app/file/image?fileName=@product.Id" />
+                                        <img id="productImage" src="https://localhost:44368/api/app/file/image?fileName=@product.Id"/>
                                     </a>
                                     <div class="row mt-5">
                                         @if (product.StockCount > 0 && CurrentUser.IsAuthenticated)
@@ -65,7 +66,7 @@
                                         }
                                         else
                                         {
-                                            <abp-button disabled="true" class="add-basket-button" button-type="Danger" text="@L["Index:OutOfStock"]" />
+                                            <abp-button disabled="true" class="add-basket-button" button-type="Danger" text="@L["Index:OutOfStock"]"/>
                                         }
                                         <div class="info-section col" style="text-align:center">
                                             <span class="product-price">@productPrice</span>
@@ -82,5 +83,3 @@
         </div>
     </div>
 </div>
-
-
